@@ -9,43 +9,66 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int counter = 0 ;
     return MaterialApp(
       title: 'Welcome to Flutter',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.teal,
-          title: const Center(
-            child: Text(
-              "Flutter Learning",
-              style: TextStyle(
-                fontSize: 40,
-                color: Colors.black
+            backgroundColor: Colors.teal,
+            title: const Center(
+              child: Text(
+                "Flutter Learning",
+                style: TextStyle(fontSize: 40, color: Colors.black),
               ),
-            ),
-          )
+            )),
+        body: const Center(
+          child: Counter(),
         ),
-        body: Center(
-          child: Column(
-            children: [
-              Text("Hello World !", style: TextStyle(fontSize: 50),),
-              Text("Compteur : $counter", style: TextStyle(fontSize: 50),)
-            ],
+      ),
+    );
+  }
+}
+
+class Counter extends StatefulWidget {
+  const Counter({Key? key}) : super(key: key);
+
+  @override
+  State<Counter> createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  late int counter;
+
+  @override
+  void initState() {
+    counter = 0;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Column(
+        children: [
+          const Text(
+            "Hello World !",
+            style: TextStyle(fontSize: 50),
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            counter++;
-          },
-          child: const Text(
-            "+",
-            style: TextStyle(
-            color: Colors.black,
-            fontSize: 35
-            )
+          Text(
+            "Compteur : $counter",
+            style: const TextStyle(fontSize: 50),
           ),
-          backgroundColor: Colors.teal,
-        ),
+          FloatingActionButton(
+            child: const Icon(Icons.add, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                counter++;
+              });
+            },
+            backgroundColor: Colors.teal,
+          ),
+        ],
       ),
     );
   }
